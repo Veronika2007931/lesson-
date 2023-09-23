@@ -33,3 +33,41 @@ function createMovie(){
    return fetch(`${BASE_URL}/movies`, option)
 
 }
+
+// function patch
+
+function updateMoovieById(bookId, update){
+const options ={
+    method: "PATCH",
+    headers: {
+        "Content-type": "application/json"
+    },
+
+    body: JSON.stringify(update)
+}
+
+return fetch(`${BASE_URL}/movies/${bookId}`, options)
+.then((res)=>res.json())
+}
+
+updateMoovieById(7,  {
+        "title": "New js",
+        "director": "Somebody"
+    }).then(res => console.log(res))
+
+
+// function deleteMoovie(id){
+//     const options = {
+//         method: "DELETE"
+//     }
+
+//     return fetch(`${BASE_URL}/moovies/${id}`, options)
+//     .then((res)=>res.json())
+
+// }
+
+// deleteMoovie(5).then(res => console.log(res))
+
+
+
+
