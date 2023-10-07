@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /lesson-/",
-    "server": "json-server --watch db.json"
+    "server": "json-server --watch db2.json"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
     "url": "https://github.com/Veronika2007931/lesson-/issues"
   },
   "dependencies": {
+    "axios": "^1.5.1",
     "json-server": "^0.17.4",
     "modern-normalize": "^1.1.0",
     "parcel-transformer-hbs": "^1.0.4"

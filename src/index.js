@@ -1,3 +1,7 @@
+import axios from 'axios';
+
+
+
 // const BASE_URL = "  http://localhost:3000"
 
 // // метод get
@@ -166,11 +170,13 @@ const refs ={
 }
 
 
+const postBoxEl = document.getElementById("postsContainer")
+const formEl = document.getElementById("postsContainer")
 
 async function getPosts() {
 
     try {
-     const posts = await fetch(BAZE_URL)
+     const posts = await axios.get(BAZE_URL)
      return await posts.json
     } catch (error) {
     
@@ -199,7 +205,12 @@ async function getPosts() {
     async function updatePost(id, title, content) {
     
     try {
-    
+
+        await axios.post(BAZE_URL, {
+        title, 
+        text
+    })
+   
     } catch (error) {
     
     console.error(error);
@@ -210,10 +221,12 @@ async function getPosts() {
     
     // Видалення поста
     
-    async function deletePost(id) {
+    async function deletePost(id){
     
     try {
-    
+     
+      const deletePost = await axios.delete(BAZE_URL, id)
+      return deletePost  
     } catch (error) {
     
     console.error(error);
@@ -244,7 +257,16 @@ async function getPosts() {
     
     // Обробник події для створення поста
     
-    document.getElementById('createPostForm').addEventListener('submit', cb);
+    formEl.addEventListener('submit', (event)=>{
+        event.preventDefault
+        const title = event.currentTarget.element.title.value
+        const text = event.currentTarget.element.text.value
+        createPost(title,text)
+
+        event.currentTarget.reset()
+        const posts = await getPosts()
+        renderPosts(posts)
+    });
     
     // Обробник події для редагування поста
     
@@ -252,7 +274,9 @@ async function getPosts() {
     
     // Обробник події для видалення поста
     
-    document.addEventListener('click', cb);
+    formEl.addEventListener('click', ()=>{
+        deletePost()
+    });
     
     // Обробник події для додавання коментаря
     
